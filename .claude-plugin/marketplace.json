@@ -23,6 +23,11 @@
       "name": "test-waechter",
       "source": "./mods/test-waechter",
       "description": "Führt nach Code-Änderungen die Projekttests aus und schickt Claude bei roten Tests zurück an die Arbeit."
+    },
+    {
+      "name": "spar-pilot",
+      "source": "./mods/spar-pilot",
+      "description": "Wählt den Denkaufwand pro Aufgabe selbst, schaltet nur um, wenn es sich trotz Prompt-Cache lohnt, und zeigt Token-Verbrauch und Kosten an."
     }
   ]
 }

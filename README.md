@@ -12,6 +12,8 @@ Claude Code Mods.
 
 **test-waechter**: Hat Claude Code geändert, laufen vor dem „fertig“ die Projekttests. Sind sie rot, muss Claude weiterarbeiten, höchstens 3 Korrekturversuche lang. Erkannt werden npm, pnpm, yarn, bun, pytest, cargo, go und make. Mit `/tests` startest du die Tests sofort, mit `/testbefehl <Befehl>` legst du einen eigenen Befehl fest.
 
+**spar-pilot**: Erkennt, ob eine Aufgabe leicht, normal oder schwer ist, und stellt den Denkaufwand (effort) passend ein. Ein Wechsel macht den Prompt-Cache ungültig, deshalb wird bei großem Gesprächsverlauf nur hochgeschaltet, wenn die Aufgabe es braucht, und nicht für kleine Ersparnisse heruntergeschaltet. Bestätigungen wie „Ja“ setzen die laufende Einstellung fort. Die Statuszeile zeigt Denkaufwand, Kontextgröße, Cache-Quote und Kosten. Mit `/sparmodus sparsam | ausgewogen | qualitaet | aus` wählst du den Modus, mit `/verbrauch` siehst du die Bilanz der Sitzung.
+
 ## Installation
 
 In einer Claude-Code-Sitzung im Terminal eingeben:
@@ -21,6 +23,7 @@ In einer Claude-Code-Sitzung im Terminal eingeben:
 /plugin install design-eigenstil --marketplace pz29105-pixel/rer
 /plugin install lern-gedaechtnis --marketplace pz29105-pixel/rer
 /plugin install test-waechter --marketplace pz29105-pixel/rer
+/plugin install spar-pilot --marketplace pz29105-pixel/rer
 ```
 
 Die Frage nach dem Marketplace mit `y` bestätigen, dann den Scope wählen.
