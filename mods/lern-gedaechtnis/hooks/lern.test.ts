@@ -1,5 +1,5 @@
 import { expect, mock, test } from 'claude-code/testing'
-import { addRule, removeRule } from './rules.ts'
+import { addRule, mergeRules, removeRule } from './rules.ts'
 
 test('Regeln: neu vorne, Dubletten aufgefrischt, löschen nach Nummer', async () => {
   let { rules, isNew } = addRule([], 'Antworte immer auf Deutsch.', 't1')
@@ -24,4 +24,13 @@ test('das Werkzeug speichert eine Regel, die danach im System-Prompt steht', asy
   const { sections } = await $.prompt.compose({ model: 'm', promptModel: 'm', surfaces: [], tools: [], outputStyle: null, traits: [] })
   const text = sections.find(s => s.id === 'lern-gedaechtnis:regeln')?.text ?? ''
   expect(text).toContain('1. Frag vor großen Umbauten nach.')
+})
+
+test('Regeln von Rechner und Projekt werden ohne Dubletten zusammengeführt', async () => {
+  const local = [{ text: 'Antworte auf Deutsch', created: '2026-01-01' }]
+  const project = [
+    { text: 'antworte auf deutsch', created: '2026-02-01' },
+    { text: 'Nutze pnpm', created: '2026-01-15' },
+  ]
+  expect(mergeRules(local, project).map(r => r.text)).toEqual(['antworte auf deutsch', 'Nutze pnpm'])
 })

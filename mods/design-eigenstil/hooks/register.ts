@@ -1,6 +1,62 @@
 import type { EngineInterface, Register } from 'claude-code'
 import { UI_FILE, scanDesign } from './rules.ts'
 
+// Einstellungen liegen im Store (bleibt auf dem eigenen Rechner) und zusätzlich
+// in einer Datei im Projekt (bleibt in Cloud-Sitzungen, sobald sie committet ist).
+// Dieser Block ist in lern-gedaechtnis, design-eigenstil und spar-pilot gleich ($ darf nicht über Dateigrenzen gereicht werden).
+const PROJECT_FILE = '.claude/mod-einstellungen.json'
+
+let projectRoot: string | null | undefined
+
+async function root($: EngineInterface) {
+  if (projectRoot !== undefined) return projectRoot
+  try {
+    const r = await $.process.run(['git', 'rev-parse', '--show-toplevel'])
+    projectRoot = r.exitCode === 0 ? r.stdout.trim() : null
+  } catch {
+    projectRoot = null
+  }
+  return projectRoot
+}
+
+async function readFile($: EngineInterface, dir: string): Promise<Record<string, unknown>> {
+  try {
+    const data: unknown = JSON.parse(await $.fs.read(`${dir}/${PROJECT_FILE}`))
+    return data && typeof data === 'object' && !Array.isArray(data) ? (data as Record<string, unknown>) : {}
+  } catch {
+    return {}
+  }
+}
+
+// Wert aus der Projektdatei, sonst aus dem Store.
+async function getSetting($: EngineInterface, key: string): Promise<unknown> {
+  const dir = await root($)
+  if (dir) {
+    const data = await readFile($, dir)
+    if (key in data) return data[key]
+  }
+  return $.store.get(key)
+}
+
+// Schreibt in Store und Projektdatei; `undefined` löscht. Antwortet, ob die Projektdatei geschrieben wurde.
+async function setSetting($: EngineInterface, key: string, value: unknown): Promise<boolean> {
+  if (value === undefined) await $.store.delete(key)
+  else await $.store.set(key, value)
+  const dir = await root($)
+  if (!dir) return false
+  try {
+    const data = await readFile($, dir)
+    if (value === undefined) delete data[key]
+    else data[key] = value
+    await $.fs.write(`${dir}/${PROJECT_FILE}`, JSON.stringify(data, null, 2) + '\n')
+    return true
+  } catch {
+    return false
+  }
+}
+
+const COMMIT_HINT = `Gespeichert in ${PROJECT_FILE} – beim nächsten Commit mit einchecken, damit es auch in Cloud-Sitzungen gilt.`
+
 const STYLE_KEY = 'designstil'
 
 const PRINCIPLES = `# Design: eigenständig statt 08/15
@@ -24,7 +80,7 @@ const INSTRUCTION =
 const reported = new Map<string, Set<string>>()
 
 async function readStyle($: EngineInterface) {
-  const value = await $.store.get(STYLE_KEY)
+  const value = await getSetting($, STYLE_KEY)
   return typeof value === 'string' && value.trim() ? value.trim() : undefined
 }
 
@@ -88,11 +144,11 @@ export const register: Register = on => {
       return { text: style ? `Aktuelle Designrichtung: ${style}` : 'Keine feste Designrichtung gesetzt – Claude wählt pro Projekt eine passende.' }
     }
     if (/^(aus|off|löschen|reset)$/i.test(arg)) {
-      await $.store.delete(STYLE_KEY)
-      return { text: 'Designrichtung gelöscht.' }
+      const inProject = await setSetting($, STYLE_KEY, undefined)
+      return { text: `Designrichtung gelöscht.${inProject ? `\n${COMMIT_HINT}` : ''}` }
     }
-    await $.store.set(STYLE_KEY, arg)
-    return { text: `Designrichtung gespeichert: ${arg}` }
+    const inProject = await setSetting($, STYLE_KEY, arg)
+    return { text: `Designrichtung gespeichert: ${arg}${inProject ? `\n${COMMIT_HINT}` : ''}` }
   })
 
   on('command.run', { command: 'designcheck' }, async $ => {

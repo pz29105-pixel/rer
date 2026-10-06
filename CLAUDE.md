@@ -22,6 +22,7 @@ Neuen Mod anlegen: Skill `/neuer-mod`.
 ## Regeln für Mods
 
 - Hooks, die etwas blockieren können (`tool.call`, `classic.Stop`, `prompt.compose`, …), bekommen ein `.catch`, das den Ablauf durchlässt: `.catch(($, e, next) => next(e))`.
+- `$` nie an Funktionen aus einer anderen Datei übergeben – das Modul lädt sonst nicht. Funktionen mit `$` gehören in `register.ts`.
 - Kein `import()` – ein Modul damit lädt nicht. Plugin-Dateien mit `import` und Endung `.ts` einbinden.
 - Werkzeuge, die evtl. fehlen (`ruff`, `shellcheck`, …), über `$.process.run` in `try/catch` aufrufen; fehlend heißt überspringen, nicht scheitern.
 - Hooks am Ende einer Antwort (`classic.Stop`) brauchen eine Obergrenze für Wiederholungen.

@@ -1,5 +1,61 @@
-import type { Register } from 'claude-code'
+import type { EngineInterface, Register } from 'claude-code'
 import { classify, contextOf, cost, decide, isEffort, MODES, parseMode, type Decision, type Effort, type TaskClass, type Usage } from './logic.ts'
+
+// Einstellungen liegen im Store (bleibt auf dem eigenen Rechner) und zusätzlich
+// in einer Datei im Projekt (bleibt in Cloud-Sitzungen, sobald sie committet ist).
+// Dieser Block ist in lern-gedaechtnis, design-eigenstil und spar-pilot gleich ($ darf nicht über Dateigrenzen gereicht werden).
+const PROJECT_FILE = '.claude/mod-einstellungen.json'
+
+let projectRoot: string | null | undefined
+
+async function root($: EngineInterface) {
+  if (projectRoot !== undefined) return projectRoot
+  try {
+    const r = await $.process.run(['git', 'rev-parse', '--show-toplevel'])
+    projectRoot = r.exitCode === 0 ? r.stdout.trim() : null
+  } catch {
+    projectRoot = null
+  }
+  return projectRoot
+}
+
+async function readFile($: EngineInterface, dir: string): Promise<Record<string, unknown>> {
+  try {
+    const data: unknown = JSON.parse(await $.fs.read(`${dir}/${PROJECT_FILE}`))
+    return data && typeof data === 'object' && !Array.isArray(data) ? (data as Record<string, unknown>) : {}
+  } catch {
+    return {}
+  }
+}
+
+// Wert aus der Projektdatei, sonst aus dem Store.
+async function getSetting($: EngineInterface, key: string): Promise<unknown> {
+  const dir = await root($)
+  if (dir) {
+    const data = await readFile($, dir)
+    if (key in data) return data[key]
+  }
+  return $.store.get(key)
+}
+
+// Schreibt in Store und Projektdatei; `undefined` löscht. Antwortet, ob die Projektdatei geschrieben wurde.
+async function setSetting($: EngineInterface, key: string, value: unknown): Promise<boolean> {
+  if (value === undefined) await $.store.delete(key)
+  else await $.store.set(key, value)
+  const dir = await root($)
+  if (!dir) return false
+  try {
+    const data = await readFile($, dir)
+    if (value === undefined) delete data[key]
+    else data[key] = value
+    await $.fs.write(`${dir}/${PROJECT_FILE}`, JSON.stringify(data, null, 2) + '\n')
+    return true
+  } catch {
+    return false
+  }
+}
+
+const COMMIT_HINT = `Gespeichert in ${PROJECT_FILE} – beim nächsten Commit mit einchecken, damit es auch in Cloud-Sitzungen gilt.`
 
 const MODE_KEY = 'modus'
 
@@ -66,7 +122,7 @@ export const register: Register = on => {
       current ??= e.effort
 
       if (pendingClass !== undefined) {
-        const mode = parseMode(await $.store.get(MODE_KEY))
+        const mode = parseMode(await getSetting($, MODE_KEY))
         lastDecision = decide({ mode, taskClass: pendingClass, current, contextTokens: lastContext })
         pendingClass = undefined
         if (lastDecision.isSwitch) stats.switches++
@@ -101,18 +157,18 @@ export const register: Register = on => {
   on('command.run', { command: 'sparmodus' }, async ($, e) => {
     const arg = e.args.trim().toLowerCase().replace('ä', 'ae')
     if (arg === '') {
-      const mode = parseMode(await $.store.get(MODE_KEY))
+      const mode = parseMode(await getSetting($, MODE_KEY))
       return { text: `Spar-Pilot-Modus: ${mode}. Aktueller Denkaufwand: ${current ?? 'noch unbekannt'}.\n\n${HELP}` }
     }
     const mode = MODES.find(m => m === arg)
     if (!mode) return { text: `Unbekannter Modus "${arg}".\n\n${HELP}` }
-    await $.store.set(MODE_KEY, mode)
-    return { text: `Spar-Pilot-Modus gesetzt: ${mode}. Gilt ab der nächsten Aufgabe.` }
+    const inProject = await setSetting($, MODE_KEY, mode)
+    return { text: `Spar-Pilot-Modus gesetzt: ${mode}. Gilt ab der nächsten Aufgabe.${inProject ? `\n${COMMIT_HINT}` : ''}` }
   })
 
   on('command.run', { command: 'verbrauch' }, async $ => {
     const u = stats.usage
-    const mode = parseMode(await $.store.get(MODE_KEY))
+    const mode = parseMode(await getSetting($, MODE_KEY))
     return {
       text: [
         `Spar-Pilot (${mode}) – diese Sitzung:`,
