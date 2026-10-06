@@ -1,0 +1,3 @@
+# Von Claude Code beim Laden eines Mods erzeugt
+mods/*/.claude-plugin/types/
+mods/*/tsconfig.json
