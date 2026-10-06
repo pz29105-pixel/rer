@@ -1,0 +1,8 @@
+{
+  "name": "rer",
+  "owner": { "name": "pz29105-pixel" },
+  "plugins": [
+    { "name": "selbst-check", "source": "./mods/selbst-check", "description": "Prüft jede Code-Änderung sofort auf Fehler und Sicherheitslücken und meldet Funde zur direkten Korrektur zurück." },
+    { "name": "design-eigenstil", "source": "./mods/design-eigenstil", "description": "Design-Regeln gegen 08/15-Look, Prüfung jeder UI-Datei auf Vorlagen-Muster und eine merkbare Stilrichtung." }
+  ]
+}
