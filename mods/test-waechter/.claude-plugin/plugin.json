@@ -1,0 +1,1 @@
+{ "name": "test-waechter", "version": "0.1.0", "description": "Führt nach Code-Änderungen am Ende jeder Antwort die Projekttests aus und schickt Claude bei roten Tests zurück an die Arbeit." }
