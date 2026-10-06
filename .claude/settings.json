@@ -8,5 +8,22 @@
       "Bash(git diff:*)",
       "Bash(git log:*)"
     ]
+  },
+  "extraKnownMarketplaces": {
+    "rer": {
+      "source": {
+        "source": "github",
+        "repo": "pz29105-pixel/rer",
+        "ref": "claude/mods"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "selbst-check@rer": true,
+    "design-eigenstil@rer": true,
+    "lern-gedaechtnis@rer": true,
+    "test-waechter@rer": true,
+    "spar-pilot@rer": true,
+    "claude-code-setup@anthropic-plugin-directory": true
   }
 }
