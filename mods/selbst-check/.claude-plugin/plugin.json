@@ -1,1 +1,1 @@
-{ "name": "selbst-check", "version": "0.1.0", "description": "Prüft jede Code-Änderung von Claude sofort auf Fehler und Sicherheitslücken und meldet Funde zur direkten Korrektur zurück." }
+{ "name": "selbst-check", "version": "0.1.1", "description": "Prüft jede Code-Änderung von Claude sofort auf Fehler und Sicherheitslücken und meldet Funde zur direkten Korrektur zurück." }

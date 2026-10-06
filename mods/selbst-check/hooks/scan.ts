@@ -18,16 +18,16 @@ const RULES: Rule[] = [
     pattern: /\b(password|passwort|passwd|secret|api_?key|token)\b\s*[:=]\s*["'][^"'\s]{6,}["']/i,
     message: 'Fest eingetragenes Passwort/Geheimnis – aus Umgebungsvariable oder Secret-Store laden',
   },
-  { id: 'eval', pattern: /(^|[^\w.])eval\s*\(/, message: 'eval() führt beliebigen Code aus', ext: CODE },
-  { id: 'new-function', pattern: /\bnew Function\s*\(/, message: 'new Function() führt beliebigen Code aus', ext: JS },
-  { id: 'inner-html', pattern: /\.(innerHTML|outerHTML)\s*=|dangerouslySetInnerHTML|document\.write\s*\(/, message: 'Mögliches XSS: ungeprüftes HTML einsetzen', ext: JS },
+  { id: 'eval', pattern: /(^|[^\w.])eval\s*\(/, message: 'eval() führt beliebigen Code aus', ext: CODE }, // selbst-check: ok (Suchmuster)
+  { id: 'new-function', pattern: /\bnew Function\s*\(/, message: 'new Function() führt beliebigen Code aus', ext: JS }, // selbst-check: ok (Suchmuster)
+  { id: 'inner-html', pattern: /\.(innerHTML|outerHTML)\s*=|dangerouslySetInnerHTML|document\.write\s*\(/, message: 'Mögliches XSS: ungeprüftes HTML einsetzen', ext: JS }, // selbst-check: ok (Suchmuster)
   { id: 'js-exec', pattern: /\bexec(Sync)?\s*\(\s*`[^`]*\$\{/, message: 'Command Injection: Shell-Befehl mit eingesetzten Variablen – execFile mit Argumentliste nutzen', ext: JS },
   { id: 'py-shell', pattern: /shell\s*=\s*True/, message: 'subprocess mit shell=True – Command Injection möglich', ext: PY },
   { id: 'py-os-system', pattern: /\bos\.(system|popen)\s*\(/, message: 'os.system/os.popen – Command Injection möglich, subprocess mit Liste nutzen', ext: PY },
   { id: 'py-exec', pattern: /(^|[^\w.])exec\s*\(/, message: 'exec() führt beliebigen Code aus', ext: PY },
   { id: 'py-pickle', pattern: /\b(pickle|cPickle|dill)\.loads?\s*\(/, message: 'pickle.load mit fremden Daten erlaubt Codeausführung', ext: PY },
   { id: 'py-yaml', pattern: /\byaml\.load\s*\((?![^)]*SafeLoader)/, message: 'yaml.load ohne SafeLoader – yaml.safe_load nutzen', ext: PY },
-  { id: 'tls-off', pattern: /verify\s*=\s*False|rejectUnauthorized\s*:\s*false|NODE_TLS_REJECT_UNAUTHORIZED|InsecureSkipVerify\s*:\s*true/, message: 'TLS-Zertifikatsprüfung ausgeschaltet' },
+  { id: 'tls-off', pattern: /verify\s*=\s*False|rejectUnauthorized\s*:\s*false|NODE_TLS_REJECT_UNAUTHORIZED|InsecureSkipVerify\s*:\s*true/, message: 'TLS-Zertifikatsprüfung ausgeschaltet' }, // selbst-check: ok (Suchmuster)
   {
     id: 'sql-injection',
     pattern: /(["'`]|f["'])\s*(SELECT|INSERT|UPDATE|DELETE)\b[^"'`]*(["'`]\s*\+|\$\{|\{[a-z_]|%s["']\s*%)/i,
@@ -39,11 +39,17 @@ const RULES: Rule[] = [
   { id: 'debug-on', pattern: /\bDEBUG\s*=\s*True\b|app\.run\([^)]*debug\s*=\s*True/, message: 'Debug-Modus aktiv – nicht in Produktion', ext: PY },
 ]
 
+// Tests enthalten absichtlich unsichere Beispiele; dort zählen nur echte Zugangsdaten.
+const TEST_FILE = /\.(test|spec)\.[cm]?[jt]sx?$|(^|\/)test_[^/]*\.py$|_test\.(py|go)$|(^|\/)(tests?|__tests__|fixtures?)\//i
+const REAL_SECRETS = new Set(['secret-private-key', 'secret-aws-key', 'secret-token'])
+
 export function scanSecurity(path: string, text: string): Finding[] {
   const found: Finding[] = []
   const lines = text.split('\n')
+  const isTest = TEST_FILE.test(path)
   for (const rule of RULES) {
     if (rule.ext && !rule.ext.test(path)) continue
+    if (isTest && !REAL_SECRETS.has(rule.id)) continue
     lines.forEach((line, i) => {
       if (line.length > 2000 || /selbst-check:\s*ok/i.test(line)) return
       if (rule.pattern.test(line)) found.push({ line: i + 1, rule: rule.id, message: rule.message })

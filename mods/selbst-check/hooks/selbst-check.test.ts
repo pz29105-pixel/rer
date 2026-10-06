@@ -18,6 +18,13 @@ test('lässt sauberen Code und markierte Zeilen in Ruhe', async () => {
   expect(scanSecurity('README.md', 'Benutze niemals eval( im Code')).toEqual([])
 })
 
+test('Testdateien: keine Fehlalarme für Beispiele, echte Schlüssel weiterhin', async () => {
+  const fixture = 'el.innerHTML = x\nconst password = "hunter2secret"\nrequests.get(u, verify=False)'
+  expect(scanSecurity('src/app.test.ts', fixture)).toEqual([])
+  expect(scanSecurity('tests/test_api.py', 'subprocess.run(c, shell=True)')).toEqual([])
+  expect(scanSecurity('src/app.test.ts', 'const k = "AKIAABCDEFGHIJKLMNOP"').map(f => f.rule)).toEqual(['secret-aws-key']) // selbst-check: ok (absichtlich falscher Testschlüssel)
+})
+
 test('meldet Funde nach einem Write direkt an Claude zurück', async ($, on) => {
   on('tool.call', { tool: 'Write' }, (_, e) => ({
     result: { type: 'create', filePath: e.file_path, content: e.content, structuredPatch: [], originalFile: null },
