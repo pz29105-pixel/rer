@@ -13,8 +13,7 @@
     "rer": {
       "source": {
         "source": "github",
-        "repo": "pz29105-pixel/rer",
-        "ref": "claude/mods"
+        "repo": "pz29105-pixel/rer"
       }
     }
   },
