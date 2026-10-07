@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(make test)",
+      "Bash(claude plugin validate:*)",
+      "Bash(claude plugin test:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)"
+    ]
+  },
+  "extraKnownMarketplaces": {
+    "rer": {
+      "source": {
+        "source": "github",
+        "repo": "pz29105-pixel/rer"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "selbst-check@rer": true,
+    "design-eigenstil@rer": true,
+    "lern-gedaechtnis@rer": true,
+    "test-waechter@rer": true,
+    "spar-pilot@rer": true,
+    "claude-code-setup@anthropic-plugin-directory": true
+  }
+}

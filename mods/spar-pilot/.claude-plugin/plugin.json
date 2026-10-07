@@ -1,0 +1,1 @@
+{ "name": "spar-pilot", "version": "0.1.1", "description": "Wählt den Denkaufwand pro Aufgabe selbst, schaltet nur um, wenn es sich trotz Prompt-Cache lohnt, und zeigt Token-Verbrauch und Kosten an." }
