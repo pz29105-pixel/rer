@@ -17,7 +17,8 @@
     "spar-pilot@rer": true,
     "claude-code-setup@anthropic-plugin-directory": true,
     "savvy-progress@claude-kit": true,
-    "savvy-flow@claude-kit": true
+    "savvy-flow@claude-kit": true,
+    "next-steps@claude-code-mods": true
   },
   "extraKnownMarketplaces": {
     "rer": {
@@ -30,6 +31,12 @@
       "source": {
         "source": "github",
         "repo": "JohnnyVizz/claude-kit"
+      }
+    },
+    "claude-code-mods": {
+      "source": {
+        "source": "github",
+        "repo": "hamzafer/claude-code-mods"
       }
     }
   }
