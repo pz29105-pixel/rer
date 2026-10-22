@@ -28,6 +28,11 @@
       "name": "spar-pilot",
       "source": "./mods/spar-pilot",
       "description": "Wählt den Denkaufwand pro Aufgabe selbst, schaltet nur um, wenn es sich trotz Prompt-Cache lohnt, und zeigt Token-Verbrauch und Kosten an."
+    },
+    {
+      "name": "cache-wetter",
+      "source": "./mods/cache-wetter",
+      "description": "Leiste über dem Eingabefeld: Cache-Restzeit mit Balken, Cache-Quote, Kontext-Wetter mit Auto-Compact-Schwelle und Compact-Button."
     }
   ]
 }

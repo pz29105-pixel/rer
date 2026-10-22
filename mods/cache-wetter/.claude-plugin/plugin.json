@@ -1,0 +1,15 @@
+{
+  "name": "cache-wetter",
+  "version": "0.1.0",
+  "description": "Leiste über dem Eingabefeld: Restzeit des Prompt-Caches mit Balken, Cache-Quote, Kontext-Wetter, Auto-Compact-Schwelle und ein Compact-Button.",
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "cacheTtl": {
+      "type": "string",
+      "title": "Cache-Laufzeit",
+      "description": "auto liest sie aus den Ereignissen der Sitzung (Modellwechsel, Compact) und den Umgebungsvariablen, sonst 5 Minuten. 5m oder 1h legt sie fest.",
+      "default": "auto",
+      "options": ["auto", "5m", "1h"]
+    }
+  }
+}
