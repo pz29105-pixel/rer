@@ -35,7 +35,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "node --test src/logic/planning.test.ts src/logic/pdfHtml.test.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "check": "node scripts/check-env.mjs"
   },
   "private": true
 }
