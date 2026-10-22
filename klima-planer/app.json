@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "Klima-Planer",
+    "slug": "klima-planer",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#F6F2EA",
+    "splash": { "image": "./assets/splash-icon.png", "resizeMode": "contain", "backgroundColor": "#F6F2EA" },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "de.example.klimaplaner",
+      "infoPlist": { "ITSAppUsesNonExemptEncryption": false }
+    },
+    "android": {
+      "package": "de.example.klimaplaner",
+      "adaptiveIcon": {
+        "backgroundColor": "#F6F2EA",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Klima-Planer braucht Zugriff auf deine Fotos, um Wandfotos und Gerätebilder auszuwählen.",
+          "cameraPermission": "Klima-Planer braucht die Kamera, um den Montageort zu fotografieren."
+        }
+      ],
+      "expo-font"
+    ]
+  }
+}
