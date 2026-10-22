@@ -9,20 +9,28 @@
       "Bash(git log:*)"
     ]
   },
-  "extraKnownMarketplaces": {
-    "rer": {
-      "source": {
-        "source": "github",
-        "repo": "pz29105-pixel/rer"
-      }
-    }
-  },
   "enabledPlugins": {
     "selbst-check@rer": true,
     "design-eigenstil@rer": true,
     "lern-gedaechtnis@rer": true,
     "test-waechter@rer": true,
     "spar-pilot@rer": true,
-    "claude-code-setup@anthropic-plugin-directory": true
+    "claude-code-setup@anthropic-plugin-directory": true,
+    "savvy-progress@claude-kit": true,
+    "savvy-flow@claude-kit": true
+  },
+  "extraKnownMarketplaces": {
+    "rer": {
+      "source": {
+        "source": "github",
+        "repo": "pz29105-pixel/rer"
+      }
+    },
+    "claude-kit": {
+      "source": {
+        "source": "github",
+        "repo": "JohnnyVizz/claude-kit"
+      }
+    }
   }
 }
