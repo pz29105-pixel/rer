@@ -19,7 +19,8 @@
     "savvy-progress@claude-kit": true,
     "savvy-flow@claude-kit": true,
     "next-steps@claude-code-mods": true,
-    "filetree@claude-code-filetree": true
+    "filetree@claude-code-filetree": true,
+    "cache-tax@claude-code-mods": true
   },
   "extraKnownMarketplaces": {
     "rer": {
@@ -37,7 +38,7 @@
     "claude-code-mods": {
       "source": {
         "source": "github",
-        "repo": "hamzafer/claude-code-mods"
+        "repo": "karanb192/claude-code-mods"
       }
     },
     "claude-code-filetree": {
