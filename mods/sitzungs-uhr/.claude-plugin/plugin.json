@@ -1,0 +1,1 @@
+{ "name": "sitzungs-uhr", "version": "0.1.0", "description": "Leiste über dem Eingabefeld: wie lange die Sitzung läuft und wie viele Nachrichten du darin geschrieben hast.", "types": "./types/index.d.ts" }

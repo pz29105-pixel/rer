@@ -33,6 +33,11 @@
       "name": "cache-wetter",
       "source": "./mods/cache-wetter",
       "description": "Leiste über dem Eingabefeld: Cache-Restzeit mit Balken, Cache-Quote, Kontext-Wetter mit Auto-Compact-Schwelle und Compact-Button."
+    },
+    {
+      "name": "sitzungs-uhr",
+      "source": "./mods/sitzungs-uhr",
+      "description": "Leiste über dem Eingabefeld: wie lange die Sitzung läuft und wie viele Nachrichten du darin geschrieben hast."
     }
   ]
 }

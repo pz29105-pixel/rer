@@ -16,6 +16,8 @@ Claude Code Mods.
 
 **cache-wetter**: Eine schmale Leiste über dem Eingabefeld. Von links nach rechts zeigt sie die Restzeit des Prompt-Caches in Minuten mit einem Balken aus 20 Kästchen (grün, im letzten Viertel gelb, in den letzten 10 % rot, bei 0 „abgelaufen“), die Cache-Quote der letzten Antwort, ein Wetter-Emoji für den Kontext (☀️ bis zur Hälfte der Auto-Compact-Schwelle, 🌧️ bis 80 % davon, ⛈️ darüber), die Kontextfüllung mit der Schwelle und einen Button „Compact“, der bei ⛈️ hervorgehoben ist. In der Desktop-App und während Claude arbeitet wird `/compact` eingereiht und startet, sobald Claude fertig ist. Mit dem Pfeil klappst du die Leiste auf Wetter, Cache-Restzeit und Kontext zusammen. Nach jedem Compact stehen Tokens vorher und nachher und die Zusammenfassung im Chat. Die Cache-Laufzeit (5 Minuten oder 1 Stunde) liest der Mod, wenn die Sitzung sie meldet (nach einem Modellwechsel) oder aus `ENABLE_PROMPT_CACHING_1H` und `FORCE_PROMPT_CACHING_5M`, sonst nimmt er 5 Minuten. In den Plugin-Einstellungen legst du sie mit `cacheTtl` fest.
 
+**sitzungs-uhr**: Eine schmale Leiste über dem Eingabefeld. Sie zeigt, wie lange die Sitzung schon läuft (Sekunden, Minuten, dann Stunden und Minuten, jede Minute neu), und wie viele Nachrichten du darin geschrieben hast. Benachrichtigungen, Zeitpläne und Plugins zählen nicht mit. Bei einer fortgesetzten Sitzung startet die Zählung bei den Nachrichten, die schon im Verlauf stehen.
+
 **Einstellungen dauerhaft:** Gemerkte Regeln, `/designstil` und `/sparmodus` werden auf dem Rechner gespeichert und zusätzlich in `.claude/mod-einstellungen.json` im jeweiligen Projekt. Wird diese Datei committet, gelten die Einstellungen auch in Cloud-Sitzungen, die jedes Mal frisch starten.
 
 ## Installation
@@ -29,6 +31,7 @@ In einer Claude-Code-Sitzung im Terminal eingeben:
 /plugin install test-waechter --marketplace pz29105-pixel/rer
 /plugin install spar-pilot --marketplace pz29105-pixel/rer
 /plugin install cache-wetter --marketplace pz29105-pixel/rer
+/plugin install sitzungs-uhr --marketplace pz29105-pixel/rer
 ```
 
 Die Frage nach dem Marketplace mit `y` bestätigen, dann den Scope wählen.
