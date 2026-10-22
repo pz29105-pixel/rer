@@ -18,7 +18,8 @@
     "claude-code-setup@anthropic-plugin-directory": true,
     "savvy-progress@claude-kit": true,
     "savvy-flow@claude-kit": true,
-    "next-steps@claude-code-mods": true
+    "next-steps@claude-code-mods": true,
+    "filetree@claude-code-filetree": true
   },
   "extraKnownMarketplaces": {
     "rer": {
@@ -37,6 +38,12 @@
       "source": {
         "source": "github",
         "repo": "hamzafer/claude-code-mods"
+      }
+    },
+    "claude-code-filetree": {
+      "source": {
+        "source": "github",
+        "repo": "data-goblin/claude-code-filetree"
       }
     }
   }
