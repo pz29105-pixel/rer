@@ -1,0 +1,6 @@
+{
+  "ios": {
+    "NSCameraUsageDescription": "KlimaPlaner braucht die Kamera, damit du den Raum und die Außenwand beim Beratungstermin fotografieren kannst.",
+    "NSPhotoLibraryUsageDescription": "KlimaPlaner braucht Zugriff auf deine Fotos, damit du Raumfotos und Produktbilder auswählen kannst."
+  }
+}
