@@ -29,3 +29,7 @@ In einer Claude-Code-Sitzung im Terminal eingeben:
 ```
 
 Die Frage nach dem Marketplace mit `y` bestätigen, dann den Scope wählen.
+
+## Apps
+
+**klima-app**: Handy-App (Expo) für Klima-Fachbetriebe. Wand beim Kunden fotografieren, Klimagerät darauf setzen und den Leitungsweg einzeichnen. Details in `klima-app/README.md`.

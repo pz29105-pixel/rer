@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "Klima-Planer",
+    "slug": "klima-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "cameraPermission": "Die App braucht die Kamera, um die Wand beim Kunden zu fotografieren.",
+          "photosPermission": "Die App braucht Zugriff auf Fotos, um ein vorhandenes Wandfoto zu öffnen."
+        }
+      ]
+    ]
+  }
+}
