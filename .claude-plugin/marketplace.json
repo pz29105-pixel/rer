@@ -28,6 +28,11 @@
       "name": "spar-pilot",
       "source": "./mods/spar-pilot",
       "description": "Wählt den Denkaufwand pro Aufgabe selbst, schaltet nur um, wenn es sich trotz Prompt-Cache lohnt, und zeigt Token-Verbrauch und Kosten an."
+    },
+    {
+      "name": "weiterbauen",
+      "source": "./mods/weiterbauen",
+      "description": "Lässt Claude nach jeder Antwort selbstständig den nächsten Code- oder Dateischritt zu einem Ziel erstellen, mit fester Obergrenze."
     }
   ]
 }
