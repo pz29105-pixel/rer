@@ -1,0 +1,38 @@
+{
+  "expo": {
+    "name": "KlimaPlaner",
+    "slug": "klimaplaner",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "locales": { "de": "./locales/de.json" },
+    "splash": { "image": "./assets/splash-icon.png", "resizeMode": "contain", "backgroundColor": "#0A5EB0" },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "de.example.klimaplaner",
+      "buildNumber": "1",
+      "infoPlist": { "CFBundleDevelopmentRegion": "de", "ITSAppUsesNonExemptEncryption": false }
+    },
+    "android": {
+      "package": "de.example.klimaplaner",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "KlimaPlaner braucht Zugriff auf deine Fotos, damit du Raumfotos und Produktbilder auswählen kannst.",
+          "cameraPermission": "KlimaPlaner braucht die Kamera, damit du den Raum und die Außenwand beim Beratungstermin fotografieren kannst."
+        }
+      ]
+    ],
+    "extra": { "eas": { "projectId": "" } }
+  }
+}

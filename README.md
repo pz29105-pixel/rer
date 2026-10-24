@@ -14,6 +14,8 @@ Claude Code Mods.
 
 **spar-pilot**: Erkennt, ob eine Aufgabe leicht, normal oder schwer ist, und stellt den Denkaufwand (effort) passend ein. Ein Wechsel macht den Prompt-Cache ungültig, deshalb wird bei großem Gesprächsverlauf nur hochgeschaltet, wenn die Aufgabe es braucht, und nicht für kleine Ersparnisse heruntergeschaltet. Bestätigungen wie „Ja“ setzen die laufende Einstellung fort. Die Statuszeile zeigt Denkaufwand, Kontextgröße, Cache-Quote und Kosten. Mit `/sparmodus sparsam | ausgewogen | qualitaet | aus` wählst du den Modus, mit `/verbrauch` siehst du die Bilanz der Sitzung.
 
+**weiterbauen**: Mit `/dauerbau <Ziel>` erstellt Claude nach jeder Antwort selbstständig den nächsten Code- oder Dateischritt, höchstens 5 Runden lang, und hört auf, sobald das Ziel erreicht ist. `/dauerbau` zeigt den Stand, `/dauerbau aus` beendet den Modus.
+
 **Einstellungen dauerhaft:** Gemerkte Regeln, `/designstil` und `/sparmodus` werden auf dem Rechner gespeichert und zusätzlich in `.claude/mod-einstellungen.json` im jeweiligen Projekt. Wird diese Datei committet, gelten die Einstellungen auch in Cloud-Sitzungen, die jedes Mal frisch starten.
 
 ## Installation
@@ -26,6 +28,7 @@ In einer Claude-Code-Sitzung im Terminal eingeben:
 /plugin install lern-gedaechtnis --marketplace pz29105-pixel/rer
 /plugin install test-waechter --marketplace pz29105-pixel/rer
 /plugin install spar-pilot --marketplace pz29105-pixel/rer
+/plugin install weiterbauen --marketplace pz29105-pixel/rer
 ```
 
 Die Frage nach dem Marketplace mit `y` bestätigen, dann den Scope wählen.

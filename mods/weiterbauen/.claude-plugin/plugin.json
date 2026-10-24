@@ -1,0 +1,1 @@
+{ "name": "weiterbauen", "version": "0.1.0", "description": "Lässt Claude nach jeder Antwort selbstständig den nächsten Code- oder Dateischritt zu einem Ziel erstellen, mit fester Obergrenze pro Runde." }
