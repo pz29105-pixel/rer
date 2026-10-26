@@ -14,6 +14,8 @@ Claude Code Mods.
 
 **spar-pilot**: Erkennt, ob eine Aufgabe leicht, normal oder schwer ist, und stellt den Denkaufwand (effort) passend ein. Ein Wechsel macht den Prompt-Cache ungültig, deshalb wird bei großem Gesprächsverlauf nur hochgeschaltet, wenn die Aufgabe es braucht, und nicht für kleine Ersparnisse heruntergeschaltet. Bestätigungen wie „Ja“ setzen die laufende Einstellung fort. Die Statuszeile zeigt Denkaufwand, Kontextgröße, Cache-Quote und Kosten. Mit `/sparmodus sparsam | ausgewogen | qualitaet | aus` wählst du den Modus, mit `/verbrauch` siehst du die Bilanz der Sitzung.
 
+**text-zu-video**: Macht aus einem Thema oder Text ein Erklärvideo. Mit `/video <Thema oder Text>` schreibt Claude ein Skript aus 4 bis 10 Szenen, der Mod rendert daraus ein MP4 mit Textkarten auf Farbverlauf (hochkant 1080x1920, mit `--quer` 1920x1080) und legt es mit einer `.srt`-Untertiteldatei in `./videos/` ab. Er braucht keine API-Schlüssel. Nötig ist `ffmpeg`; mit `espeak-ng` spricht eine deutsche Stimme den Text, ohne bleibt das Video stumm.
+
 **Einstellungen dauerhaft:** Gemerkte Regeln, `/designstil` und `/sparmodus` werden auf dem Rechner gespeichert und zusätzlich in `.claude/mod-einstellungen.json` im jeweiligen Projekt. Wird diese Datei committet, gelten die Einstellungen auch in Cloud-Sitzungen, die jedes Mal frisch starten.
 
 ## Installation
@@ -26,6 +28,7 @@ In einer Claude-Code-Sitzung im Terminal eingeben:
 /plugin install lern-gedaechtnis --marketplace pz29105-pixel/rer
 /plugin install test-waechter --marketplace pz29105-pixel/rer
 /plugin install spar-pilot --marketplace pz29105-pixel/rer
+/plugin install text-zu-video --marketplace pz29105-pixel/rer
 ```
 
 Die Frage nach dem Marketplace mit `y` bestätigen, dann den Scope wählen.
