@@ -14,7 +14,9 @@ Claude Code Mods.
 
 **spar-pilot**: Erkennt, ob eine Aufgabe leicht, normal oder schwer ist, und stellt den Denkaufwand (effort) passend ein. Ein Wechsel macht den Prompt-Cache ungültig, deshalb wird bei großem Gesprächsverlauf nur hochgeschaltet, wenn die Aufgabe es braucht, und nicht für kleine Ersparnisse heruntergeschaltet. Bestätigungen wie „Ja“ setzen die laufende Einstellung fort. Die Statuszeile zeigt Denkaufwand, Kontextgröße, Cache-Quote und Kosten. Mit `/sparmodus sparsam | ausgewogen | qualitaet | aus` wählst du den Modus, mit `/verbrauch` siehst du die Bilanz der Sitzung.
 
-**Einstellungen dauerhaft:** Gemerkte Regeln, `/designstil` und `/sparmodus` werden auf dem Rechner gespeichert und zusätzlich in `.claude/mod-einstellungen.json` im jeweiligen Projekt. Wird diese Datei committet, gelten die Einstellungen auch in Cloud-Sitzungen, die jedes Mal frisch starten.
+**video-studio**: Gibt Claude den festen Stil für TikTok-Dramavideos mit (1:1-Anime-Bild auf 9:16, 60 s, englisches Voiceover, Ein-Wort-Untertitel, Bild-Prompts mit Charakter-Sheet). Claude trägt jedes gelieferte Video in eine Liste ein, merkt sich Feedback als Lektionen (gut, schlecht, Regel) und hängt deine Ergebnis-Zahlen an die Videos, damit Hooks und Geschichten sich nicht wiederholen und besser werden. Mit `/videostil` siehst du Stil, Lektionen und Videoliste, mit `/lektion <gut|schlecht|regel> <Text>` fügst du eine Lektion hinzu, mit `/lektion-loeschen <Nr | alle>` löschst du sie, mit `/videoergebnis <Nr> <Zahlen>` trägst du Ergebnisse ein.
+
+**Einstellungen dauerhaft:** Gemerkte Regeln, Video-Lektionen, `/designstil` und `/sparmodus` werden auf dem Rechner gespeichert und zusätzlich in `.claude/mod-einstellungen.json` im jeweiligen Projekt. Wird diese Datei committet, gelten die Einstellungen auch in Cloud-Sitzungen, die jedes Mal frisch starten.
 
 ## Installation
 
@@ -26,6 +28,7 @@ In einer Claude-Code-Sitzung im Terminal eingeben:
 /plugin install lern-gedaechtnis --marketplace pz29105-pixel/rer
 /plugin install test-waechter --marketplace pz29105-pixel/rer
 /plugin install spar-pilot --marketplace pz29105-pixel/rer
+/plugin install video-studio --marketplace pz29105-pixel/rer
 ```
 
 Die Frage nach dem Marketplace mit `y` bestätigen, dann den Scope wählen.

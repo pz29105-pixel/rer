@@ -28,6 +28,11 @@
       "name": "spar-pilot",
       "source": "./mods/spar-pilot",
       "description": "Wählt den Denkaufwand pro Aufgabe selbst, schaltet nur um, wenn es sich trotz Prompt-Cache lohnt, und zeigt Token-Verbrauch und Kosten an."
+    },
+    {
+      "name": "video-studio",
+      "source": "./mods/video-studio",
+      "description": "Erstellt TikTok-Dramavideos im festen Anime-Stil (Skript, Szenenplan, Bild-Prompts) und lernt aus Feedback und Ergebnissen dazu."
     }
   ]
 }
