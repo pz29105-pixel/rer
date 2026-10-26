@@ -1,0 +1,1 @@
+{ "name": "text-zu-video", "version": "0.1.0", "description": "Macht aus einem Thema oder Text ein Erklärvideo (MP4): Claude schreibt die Szenen, ffmpeg rendert Textkarten, eine lokale Stimme spricht." }

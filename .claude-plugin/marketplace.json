@@ -28,6 +28,11 @@
       "name": "spar-pilot",
       "source": "./mods/spar-pilot",
       "description": "Wählt den Denkaufwand pro Aufgabe selbst, schaltet nur um, wenn es sich trotz Prompt-Cache lohnt, und zeigt Token-Verbrauch und Kosten an."
+    },
+    {
+      "name": "text-zu-video",
+      "source": "./mods/text-zu-video",
+      "description": "Macht aus einem Thema oder Text ein Erklärvideo (MP4): Claude schreibt die Szenen, ffmpeg rendert Textkarten, eine lokale Stimme spricht."
     }
   ]
 }
